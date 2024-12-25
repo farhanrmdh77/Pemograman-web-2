@@ -2,6 +2,7 @@
 
 require_once "Buku.php";
 require_once "Database/Database.php";
+
 class ListBuku{
     
 public function getData(){
@@ -12,32 +13,32 @@ public function getData(){
 
     $query = $koneksi->query($sql);
 
-    $list_buku = [];
+    $daftar_buku = [];
 
-    if ($query->num_rows > 0){
+    if($query->num_rows > 0){
         while($row = $query->fetch_assoc()){
-            $buku = new Buku($row['Judul'], $row['Pengarang'], $row['Penerbit'], $row['Tahun']);
-            $buku->setId($row['ID']);
-            array_push($list_buku, $buku);
+            $buku = new Buku($row['judul'], $row['pengarang'], $row['penerbit'], $row['tahun']);
+            array_push($daftar_buku, $buku);
         }
     }
-    return $list_buku;
-    }
 
-    public function getKolomTabel(){
-        return array('ID', 'Judul', 'Pengarang', 'Penerbit', 'Tahun', 'Ubah');
-    }
+    return $daftar_buku;
+}
 
-    public function simpan($buku){
-        $db = new Database();
-        $koneksi = $db->getKoneksi();
+public function getKolomTabel(){
+    return array('No', 'Judul', 'Pengarang', 'Penerbit', 'Tahun', 'Aksi');
+}
 
-        $sql = "INSERT INTO buku (judul, pengarang, penerbit, tahun) 
-        VALUES('".$buku->getJudul()."', '".$buku->getPengarang()."', '".$buku->getPenerbit()."', '".$buku->getTahun()."')";
+public function simpan($buku){
+    $db = new Database();
+    $koneksi = $db->getKoneksi();
+
+    $sql = "INSERT INTO buku VALUES ('".$buku->getJudul()."', '".$buku->getPengarang()."', '".$buku->getPenerbit()."', '".$buku->getTahun()."')";
+
+    $query = $koneksi->query($sql);
+
+    return $query;  
+}
 
 
-        $query = $koneksi->query($sql);
-
-        return $query;
-    }
 }

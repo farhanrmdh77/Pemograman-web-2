@@ -1,6 +1,7 @@
-<?php 
+<?php
 
-class Buku {
+class Buku
+{
     protected $id;
     protected $judul;
     protected $pengarang;
@@ -9,33 +10,39 @@ class Buku {
 
     public function __construct($judul, $pengarang, $penerbit, $tahun)
     {
+
         $this->judul = $judul;
         $this->pengarang = $pengarang;
         $this->penerbit = $penerbit;
-        $this->tahun = $tahun;        
+        $this->tahun = $tahun;
     }
-    
-    public function setId($id) {
+
+    public function setId($id)
+    {
         $this->id = $id;
     }
 
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
-    
-    public function getJudul(){
+    public function getJudul()
+    {
         return $this->judul;
     }
 
-    public function getPengarang(){
+    public function getPengarang()
+    {
         return $this->pengarang;
     }
 
-    public function getPenerbit(){
+    public function getPenerbit()
+    {
         return $this->penerbit;
     }
 
-    public function getTahun(){
+    public function getTahun()
+    {
         return $this->tahun;
-    } 
+    }
 }
